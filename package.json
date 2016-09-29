@@ -1,0 +1,33 @@
+{
+  "name": "360",
+  "version": "1.0.0",
+  "description": "Modulo contable",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "gulp-install": "^0.6.0",
+    "gulp-jquery": "^1.1.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-install": "^0.6.0",
+    "gulp-uglify": "^1.5.3",
+    "laravel-elixir": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nredbugs/360.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nredbugs/360/issues"
+  },
+  "homepage": "https://github.com/nredbugs/360#readme"
+}

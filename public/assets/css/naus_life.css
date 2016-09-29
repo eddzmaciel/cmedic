@@ -1,0 +1,99 @@
+/*
+|--------------------------------------------------------------------------
+| CSS Identidad grafica de NausLife
+| Nredbugs 2015
+|--------------------------------------------------------------------------
+*/
+
+aside {
+  display: block;
+  overflow: hidden;
+  background: #009de0;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…BoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+  background: -moz-linear-gradient(left,##009de0 93%,#4470b4 100%);
+  background: -webkit-gradient(linear,left top,right top,color-stop(93%,##009de0),color-stop(100%,#4470b4));
+  background: -webkit-linear-gradient(left,##009de0 93%,#4470b4 100%);
+  background: -o-linear-gradient(left,##009de0 93%,#4470b4 100%);
+  background: -ms-linear-gradient(left,##009de0 93%,#4470b4 100%);
+  background: linear-gradient(to right,#009de0 93%,#4470b4 100%);
+  min-height: 100%;
+}
+#left-panel {
+	padding-top: 45px;
+}
+.login-info {
+	border-bottom: 1px solid #FFFFFF;
+}
+.login-info>span {
+	border-bottom: 1px solid #009DE0;
+	/*border-bottom: 1px solid #4470B4;*/
+}
+.login-info a {
+	color: #FFFFFF;
+}
+nav ul .active>a {
+  color: #FFF!important;
+  background: #005389;
+}
+nav ul a:hover {
+  background: #fff;
+  color: #005389!important;
+}
+nav ul li a {
+	color: #FFFFFF;
+}
+nav ul ul {
+	background: rgba(0, 0, 0, 0.6);
+}
+nav ul ul li>a:hover {
+	background: #fff;
+  	color: #005389!important;
+}
+nav ul li.open>a, nav ul li.open>a b {
+  color: #005389!important;
+}
+
+nav ul li.open>a, nav ul li.open.active>a b {
+  color: #FFF!important;
+  background: #005389;
+}
+.minifyme {
+	border-bottom: 1px solid #020A13;
+	background: #07264C;
+}
+.minified nav>ul>li {
+	border-bottom: 1px solid #13B3F7;
+	border-top: 1px solid #1384B4;
+}
+.minified nav>ul>li>ul {
+    background: #07264C;
+}
+.minified nav>ul>li>ul>li {
+    background-color: rgba(0, 83, 137, 1);
+}
+#ribbon {
+	background: #005389;
+}
+.btn.btn-ribbon {
+	background-color: #009DE0;
+	background-image: -moz-linear-gradient(top,#009DE0,#009DE0);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#009DE0),to(#009DE0));
+	background-image: -webkit-linear-gradient(top,#009DE0,#009DE0);
+	background-image: -o-linear-gradient(top,#009DE0,#009DE0);
+	background-image: linear-gradient(to bottom,#009DE0,#009DE0);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff777777', endColorstr='#ff666666', GradientType=0);
+	color: #fff;
+	padding: 0 5px;
+	line-height: 20px;
+	vertical-align: middle;
+	height: 20px;
+	display: block;
+	border: none;
+	float: left;
+	margin: 0 8px 0 0;
+	cursor: pointer;
+}
+.select2-hidden-accessible{
+	display:none;
+}

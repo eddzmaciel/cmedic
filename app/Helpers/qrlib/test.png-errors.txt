@@ -1,0 +1,1 @@
+2016-06-03 17:17:58: file_put_contents(C:\wamp64\www\apps_laravel\360\app\Helpers\qrlib\cache\frame_1.dat): failed to open stream: No such file or directory2016-06-03 17:19:56: file_put_contents(C:\wamp64\www\apps_laravel\360\app\Helpers\qrlib\cache\frame_1.dat): failed to open stream: No such file or directory
