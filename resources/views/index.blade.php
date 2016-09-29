@@ -55,7 +55,7 @@
 	<body class="nredbugs">
 		@include('helper.header')
 		@if (Auth::user()->role_id == 1)
-		    @include('helper.sidebar_contabilidad')
+		    @include('helper.sidebar_medico')
 		@endif
 		@include('helper.main_panel')
 

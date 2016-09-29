@@ -17,13 +17,13 @@
 	<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 		<ul id="sparks" class="">
 			<li class="sparks-info">
-				<h5> Facturas <span class="txt-color-greenDark"><i class="fa fa-share"></i>&nbsp;0</span></h5>
+				<h5> Medicos <span class="txt-color-greenDark"><i class="fa fa-share"></i>&nbsp;0</span></h5>
 			</li>
 			<li class="sparks-info">
-				<h5> Clientes <span class="txt-color-greenDark"><i class="fa fa-cubes"></i>&nbsp;0</span></h5>
+				<h5> Pacientes <span class="txt-color-greenDark"><i class="fa fa-cubes"></i>&nbsp;0</span></h5>
 			</li>
 			<li class="sparks-info">
-				<h5> Servicios <span class="txt-color-greenDark"><i class="fa fa-list-alt"></i>&nbsp;0</span></h5>
+				<h5> Citas <span class="txt-color-greenDark"><i class="fa fa-list-alt"></i>&nbsp;0</span></h5>
 			</li>
 		</ul>
 	</div>

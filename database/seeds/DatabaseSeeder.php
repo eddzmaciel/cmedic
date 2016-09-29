@@ -3,10 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Faker\Factory as Faker;
-use database\seeds\BancosTableSeeder; 
-use database\seeds\MonedasTableSeeder; 
-use database\seeds\MetodospagoTableSeeder; 
-use database\seeds\CuentasContablesTableSeeder; 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
