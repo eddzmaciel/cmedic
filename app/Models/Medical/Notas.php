@@ -5,6 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 class Notas extends Model {
 
 	 protected $table = 'notas';    
-  protected $fillable = array('id','nfecha_emision','nmedicamentos','nestatus','nnotas');
+  protected $fillable = array('id','nfecha_emision','npid','nmid','nmedicamentos','nestatus','nnotas');
 
 }

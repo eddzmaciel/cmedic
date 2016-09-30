@@ -168,7 +168,7 @@
 								<div class="form-group">
 									<label for="">Telefono</label>
 									<label class="input-group">
-										<input type="text" class="form-control datepicker" name="dtelefono" id="inpt5" tyle="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+										<input type="number" class="form-control datepicker" name="dtelefono" id="inpt5" tyle="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
 										<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									</label>
 								</div>
@@ -177,7 +177,7 @@
 								<div class="form-group">
 									<label for="">Email</label>
 									<label class="input-group">
-										<input type="text" class="form-control" name="demail" id="inpt6" tyle="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+										<input type="email" class="form-control" name="demail" id="inpt6" tyle="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
 										<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									</label>
 								</div>
@@ -204,93 +204,96 @@
 <!-- SCRIPT-->
 <script type="text/javascript">
 	_g.dao = {
-		getTable :function(){
-				$.ajax({
-					url: '/api_med/medicos/',
-					type: 'GET',
-					dataType: 'json',
-					success: function(data){
-							if(data.length != 0){
-						/*$.each(data, function(i) {
-						if(data[i].estatus == 0){
-						 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></a>';
-							}else if(data[i].estatus == 1){
-						 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></a>';
-							}
-						});*/
-
-							var datelist = data;var table = $('#tblData');
-							var columnDefs = [{"aTargets" : [ 0 ], "mData" : "id"},
-							    	          {"aTargets" : [ 1 ], "mData" : "dcedprof"},
-							    	          {"aTargets" : [ 2 ], "mData" : "dnombre"},
-							    	          {"aTargets" : [ 3 ], "mData" : "dapellidos"},
-							    	          {"aTargets" : [ 4 ], "mData" : "dtelefono"},
-							    	          {"aTargets" : [ 5 ], "mData" : "demail"},
-							    	          {
-												"aTargets": [ 6 ],
-												"mData": null,
-												"mRender": function (o) { 
-													return '<a class="btn btn-sm btn-success" onclick="_g.dao.getModificarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-pencil"></i></a>&nbsp;'+
-															'<a class="btn btn-sm btn-danger" onclick="_g.dao.getEliminarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-trash"></i></a>&nbsp;'; 
-												}
-
-
-											  }];
-
-
-
-
-							_gen.setTableNE(table,columnDefs,datelist);
-						}else{
-							$('#tblData').dataTable();
-							_gen.notificacion_min('Error', 'No se encontraron registros con error',4);
-						}
-					}
-				}).done(function (data){
-					$('#tbDatos').show('slow');
-				});
-			},
-		getEliminarDatos :function(id){
+			getTable :function(){
 					$.ajax({
-						url: '/api_med/medicos/'+id,
-						type: 'DELETE',
-						dataType: 'json',			
-					}).done(function(data){
-						_g.dao.getTable();
-						_gen.notificacion_min('&Eacute;xito', 'La operaci&oacute;n se realiz&oacute; exitosamente',1);
-					}).fail(function(data){
-						_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de eliminar, intente de nuevo.',4);
-					});
-				},
-
-		getModificarDatos :function(id){
-					$.ajax({
-						url: '/api_med/info_medicos/'+id,
+						url: '/api_med/medicos/',
 						type: 'GET',
-						dataType: 'json',			
-					}).done(function(data){
-						_g.dao.getLimpiarDatos();
-						$('#inpt1').val(id);
-						$('#inpt2').val(data.dcedprof);
-						$('#inpt3').val(data.dnombre);
-						$('#inpt4').val(data.dapellidos); //pendiente
-						$('#inpt5').val(data.dtelefono); //pendiente
-						$('#inpt6').val(data.demail); //pendiente
-						$('#EditarDatosModal').modal('show');		
-					}).fail(function(data){
-						_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de modificar la información, intente de nuevo.',4);
+						dataType: 'json',
+						success: function(data){
+								if(data.length != 0){
+							/*$.each(data, function(i) {
+							if(data[i].estatus == 0){
+							 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></a>';
+								}else if(data[i].estatus == 1){
+							 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></a>';
+								}
+							});*/
+
+								var datelist = data;var table = $('#tblData');
+								var columnDefs = [{"aTargets" : [ 0 ], "mData" : "id"},
+								    	          {"aTargets" : [ 1 ], "mData" : "dcedprof"},
+								    	          {"aTargets" : [ 2 ], "mData" : "dnombre"},
+								    	          {"aTargets" : [ 3 ], "mData" : "dapellidos"},
+								    	          {"aTargets" : [ 4 ], "mData" : "dtelefono"},
+								    	          {"aTargets" : [ 5 ], "mData" : "demail"},
+								    	          {
+													"aTargets": [ 6 ],
+													"mData": null,
+													"mRender": function (o) { 
+														return '<a class="btn btn-sm btn-success" onclick="_g.dao.getModificarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-pencil"></i></a>&nbsp;'+
+																'<a class="btn btn-sm btn-danger" onclick="_g.dao.getEliminarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-trash"></i></a>&nbsp;'; 
+													}
+
+												  }];
+
+								_gen.setTableNE(table,columnDefs,datelist);
+							}else{
+								$('#tblData').dataTable();
+								_gen.notificacion_min('Error', 'No se encontraron registros con error',4);
+							}
+						}
+					}).done(function (data){
+						$('#tbDatos').show('slow');
 					});
 				},
+			getEliminarDatos :function(id){
+						$.ajax({
+							url: '/api_med/medicos/'+id,
+							type: 'DELETE',
+							dataType: 'json',			
+						}).done(function(data){
+							_g.dao.getTable();
+							_gen.notificacion_min('&Eacute;xito', 'La operaci&oacute;n se realiz&oacute; exitosamente',1);
+						}).fail(function(data){
+							_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de eliminar, intente de nuevo.',4);
+						});
+					},
 
-		getLimpiarDatos :function(){
-				$('#inpt1').val('');
-				$('#inpt2').val('');
-				$('#inpt3').val('');
-				$('#inpt4').val('');
-				$('#inpt5').val('');
-				$('#inpt6').val('');
-			},
-			}; 
+			getModificarDatos :function(id){
+						$.ajax({
+							url: '/api_med/info_medicos/'+id,
+							type: 'GET',
+							dataType: 'json',			
+						}).done(function(data){
+							_g.dao.getLimpiarDatos();
+							$('#inpt1').val(id);
+							$('#inpt2').val(data.dcedprof);
+							$('#inpt3').val(data.dnombre);
+							$('#inpt4').val(data.dapellidos); //pendiente
+							$('#inpt5').val(data.dtelefono); //pendiente
+							$('#inpt6').val(data.demail); //pendiente
+							$('#EditarDatosModal').modal('show');		
+						}).fail(function(data){
+							_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de modificar la información, intente de nuevo.',4);
+						});
+					},			
+			getLimpiarDatos :function(){
+					$('#inpt1').val('');
+					$('#inpt2').val('');
+					$('#inpt3').val('');
+					$('#inpt4').val('');
+					$('#inpt5').val('');
+
+					$('#nipt1').val('');
+					$('#nipt2').val('');
+					$('#nipt3').val('');
+					$('#nipt4').val('');
+					$('#nipt5').val('');
+					},
+ 		
+ 			}; 
+			
+		
 		var functionOperacionesForm = function() {
 				_g.dao.getTable();
 				
@@ -313,13 +316,6 @@
 						});
 					}
 				});
-				/*
-				$('#btnCancelarEditar').click(function (e){
-					e.preventDefault();
-					$( '#EditarDatosModal').hide();
-					//$('#cargandoInfoEmpresas').show('slow');
-
-				});*/
 
 				$('#btnNuevo').click(function (e){
 					e.preventDefault();
@@ -333,121 +329,84 @@
 					//$('#cargandoInfoEmpresas').show('slow');
 					_g.dao.getTable();
 				});
-
+				
 				$("#frmEditarDatos").validate({
 					rules:{
-						estatus : {
-							required :true
+							inpt1 : {
+								required :true
+							},
+							inpt2 : {
+								required :true
+							},
+							inpt3 : {
+								required :true
+							},
+							inpt4 : {
+								required :true
+							},
+							inpt5 : {
+								required :true
+							}
 						},
-						nombre : {
-							required :true
-						},
-						num_exterior : {
-							required :true
-						},
-						codigo_postal : {
-							required :true
-						},
-						num_interior : {
-							required :true
-						},
-						rfc : {
-							required :true
-						},
-						telefono : {
-							required :true
-						},				
-						ciudad_municipio : {
-							required :true
-						}
-					},
 					messages : {
-						estatus : {
-							required : "Es obligatorio llenar los datos",
-						},
-						nombre : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_exterior : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						codigo_postal : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_interior : {
-							required : "Es obligatorio llenar los datos",
-						},
-						rfc : {
-							required : "Es obligatorio llenar los datos",
-						},
-						telefono : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						ciudad_municipio : {
-							required : "Es obligatorio llenar los datos",
-						}						
-					},
-					submitHandler : function(form) {
-					    form.preventDefault();
-					}
+							inpt1 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt2 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt3 : {
+								required : "Es obligatorio llenar los datos",
+							},				
+							inpt4 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt5 : {
+								required : "Es obligatorio llenar los datos",
+							}						
+						},	
+						submitHandler : function(form) {
+						    form.preventDefault();
+						}
 				});
-
 				$("#frmNuevoDato").validate({
-					rules:{
-						estatus : {
-							required :true
-						},
-						nombre : {
-							required :true
-						},
-						num_exterior : {
-							required :true
-						},
-						codigo_postal : {
-							required :true
-						},
-						num_interior : {
-							required :true
-						},
-						rfc : {
-							required :true
-						},
-						telefono : {
-							required :true
-						},				
-						ciudad_municipio : {
-							required :true
+						rules:{
+							nipt1 : {
+								required :true
+							},
+							nipt2 : {
+								required :true
+							},
+							nipt3 : {
+								required :true
+							},
+							nipt4 : {
+								required :true
+							},
+							nipt5 : {
+								required :true
+							}		
+							},
+						messages : {
+							nipt1 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt2 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt3 : {
+								required : "Es obligatorio llenar los datos",
+							},				
+							nipt4 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt5 : {
+								required : "Es obligatorio llenar los datos",
+							}				
+							},
+						submitHandler : function(form) {
+						    form.preventDefault(); 
 						}
-					},
-					messages : {
-						estatus : {
-							required : "Es obligatorio llenar los datos",
-						},
-						nombre : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_exterior : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						codigo_postal : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_interior : {
-							required : "Es obligatorio llenar los datos",
-						},
-						rfc : {
-							required : "Es obligatorio llenar los datos",
-						},
-						telefono : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						ciudad_municipio : {
-							required : "Es obligatorio llenar los datos",
-						}						
-					},
-					submitHandler : function(form) {
-					    form.preventDefault();
-					}
 				});
 			}; 
 			functionOperacionesForm(); 

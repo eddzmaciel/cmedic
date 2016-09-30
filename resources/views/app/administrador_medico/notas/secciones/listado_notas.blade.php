@@ -50,7 +50,7 @@
 				<label class="label">Medicamentos</label>
 				<label class="input">
 				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="nmedicamentos" id="nipt2" placeholder="Escribir los Medicamentos." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<input type="text" required class="input-sm" name="nmedicamentos" id="nipt2" placeholder="Insertar los Medicamentos." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
 					<b class="tooltip tooltip-top-right">
 					<i class="fa fa-warning txt-color-teal"></i> 
 					<strong>Observacion</strong> Campo Obligatorio</b>
@@ -62,7 +62,7 @@
 				<label class="label">Estatus</label>
 				<label class="input">
 				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text"  required class="input-sm" name="nestatus" id="nipt3" placeholder="Escribe el Estatus." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" >
+					<input type="text"  required class="input-sm" name="nestatus" id="nipt3" placeholder="Insertar el Estatus." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" >
 					<b class="tooltip tooltip-top-right">
 					<i class="fa fa-warning txt-color-teal"></i> 
 					<strong>Observacion</strong> Campo Obligatorio</b>
@@ -72,7 +72,30 @@
 				<label class="label">Notas Adicionales</label>
 				<label class="input">
 				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="nestatus" id="nipt4" placeholder="Escribe Notas Adicionales" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<input type="text" required class="input-sm" name="nnotas" id="nipt4" placeholder="Insertar Notas Adicionales" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<b class="tooltip tooltip-top-right">
+					<i class="fa fa-warning txt-color-teal"></i> 
+					<strong>Observacion</strong> Campo Obligatorio</b>
+				</label>
+			</section>
+		</div>
+
+		<div class="row">																	
+		<section class="col col-6">
+				<label class="label">Paciente</label>
+				<label class="input">
+				<i class="icon-append fa fa-question-circle"></i>
+					<input type="text" required class="input-sm" name="npid" id="nipt5" placeholder="Insertar el Paciente" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<b class="tooltip tooltip-top-right">
+					<i class="fa fa-warning txt-color-teal"></i> 
+					<strong>Observacion</strong> Campo Obligatorio</b>
+				</label>
+			</section>
+			<section class="col col-6">
+				<label class="label">Médico</label>
+				<label class="input">
+				<i class="icon-append fa fa-question-circle"></i>
+					<input type="text" required class="input-sm" name="nmid" id="nipt6" placeholder="Insertar el Médico." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
 					<b class="tooltip tooltip-top-right">
 					<i class="fa fa-warning txt-color-teal"></i> 
 					<strong>Observacion</strong> Campo Obligatorio</b>
@@ -98,10 +121,12 @@
 	<table id="tblData" class="table table-hover table-striped" width="100%">
 		<thead>
 			<tr>
+				<th data-hide="phone">Estatus</th>  <!-- id paciente-->
 				<th data-hide="phone">Id</th>
 				<th data-hide="phone">Fecha de Emision</th>
+				<th data-hide="phone">Paciente</th>
+				<th data-hide="phone">Medico</th>
 				<th data-hide="phone">Medicamentos</th>
-				<th data-hide="phone">Estatus de Receta</th>  <!-- id paciente-->
 				<th data-hide="phone">Notas Adicionales</th> <!-- id medico--> 
 				<th width="85px">Acciones</th>
 			</tr>
@@ -135,7 +160,24 @@
 										<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									</label>
 								</div>
-							</div>						
+							</div>	
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="">Paciente</label>
+									<label class="input-group">
+										<input type="text" class="form-control" name="npid" id="inpt6" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+										<span class="input-group-addon"><i class="fa fa-list"></i></span>
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="">Médico</label>
+									<label class="input-group">
+										<input type="number" class="form-control datepicker" disabled="disabled" name="nmid" id="inpt7" >
+										<span class="input-group-addon"><i class="fa fa-list"></i></span>
+									</label>
+							</div>					
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="">Medicamentos</label>
@@ -191,20 +233,22 @@
 					dataType: 'json',
 					success: function(data){
 							if(data.length != 0){
-						/*$.each(data, function(i) {
-						if(data[i].estatus == 0){
-						 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></a>';
-							}else if(data[i].estatus == 1){
-						 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></a>';
-							}
-						});*/
+						$.each(data, function(i) {
+							if(data[i].nestatus == 0){
+							 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></a>';
+								}else if(data[i].nestatus == 1){
+							 	data[i].label_estatus = '<a href="javascript:void(0);" readonly="true" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></a>';
+								}
+						});
 							var datelist = data;var table = $('#tblData');
-							var columnDefs = [{"aTargets" : [ 0 ], "mData" : "id"},
-							    	          {"aTargets" : [ 1 ], "mData" : "nfecha_emision"},
-							    	          {"aTargets" : [ 2 ], "mData" : "nmedicamentos"},
-							    	          {"aTargets" : [ 3 ], "mData" : "nestatus"},
-							    	          {"aTargets" : [ 4 ], "mData" : "nnotas"},
-							    	          {	"aTargets": [ 5 ], "mData": null,
+							var columnDefs = [{"aTargets" : [ 0 ], "mData" : "label_estatus"},
+							    	          {"aTargets" : [ 1 ], "mData" : "id"},
+							    	          {"aTargets" : [ 2 ], "mData" : "nfecha_emision"},
+							    	          {"aTargets" : [ 3], "mData" : "npid"},
+							    	          {"aTargets" : [ 4 ], "mData" : "nmid"},
+							    	          {"aTargets" : [ 5 ], "mData" : "nmedicamentos"},
+							    	          {"aTargets" : [ 6 ], "mData" : "nnotas"},
+							    	          {	"aTargets": [ 7 ], "mData": null,
 												"mRender": function (o) { 
 													return '<a class="btn btn-sm btn-success" onclick="_g.dao.getModificarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-pencil"></i></a>&nbsp;'+
 															'<a class="btn btn-sm btn-danger" onclick="_g.dao.getEliminarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-trash"></i></a>&nbsp;'; 
@@ -246,22 +290,27 @@
 						$('#inpt3').val(data.nmedicamentos);
 						$('#inpt4').val(data.nestatus);
 						$('#inpt5').val(data.nnotas);
+						$('#inpt6').val(data.npid);
+						$('#inpt7').val(data.nmid);
 						$('#EditarDatosModal').modal('show');		
 					}).fail(function(data){
 						_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de modificar la información, intente de nuevo.',4);
 					});
 				},
 
-			getLimpiarDatos :function(){
+		getLimpiarDatos :function(){
 					$('#inpt1').val('');
 					$('#inpt2').val('');
 					$('#inpt3').val('');
 					$('#inpt4').val('');
 					$('#inpt5').val('');
-					$('#inpt6').val('');
-					$('#inpt7').val('');
-					$('#inpt8').val('');
-				},
+
+					$('#nipt1').val('');
+					$('#nipt2').val('');
+					$('#nipt3').val('');
+					$('#nipt4').val('');
+					$('#nipt5').val('');
+					},
 			}; 
 		var functionOperacionesForm = function() {
 				_g.dao.getTable();
@@ -285,13 +334,6 @@
 						});
 					}
 				});
-				/*
-				$('#btnCancelarEditar').click(function (e){
-					e.preventDefault();
-					$( '#EditarDatosModal').hide();
-					//$('#cargandoInfoEmpresas').show('slow');
-
-				});*/
 
 				$('#btnNuevo').click(function (e){
 					e.preventDefault();
@@ -306,121 +348,7 @@
 					_g.dao.getTable();
 				});
 
-				/*$("#frmEditarDatos").validate({
-					rules:{
-						estatus : {
-							required :true
-						},
-						nombre : {
-							required :true
-						},
-						num_exterior : {
-							required :true
-						},
-						codigo_postal : {
-							required :true
-						},
-						num_interior : {
-							required :true
-						},
-						rfc : {
-							required :true
-						},
-						telefono : {
-							required :true
-						},				
-						ciudad_municipio : {
-							required :true
-						}
-					},
-					messages : {
-						estatus : {
-							required : "Es obligatorio llenar los datos",
-						},
-						nombre : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_exterior : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						codigo_postal : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_interior : {
-							required : "Es obligatorio llenar los datos",
-						},
-						rfc : {
-							required : "Es obligatorio llenar los datos",
-						},
-						telefono : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						ciudad_municipio : {
-							required : "Es obligatorio llenar los datos",
-						}						
-					},
-					submitHandler : function(form) {
-					    form.preventDefault();
-					}
-				});
 
-				$("#frmNuevoDato").validate({
-					rules:{
-						estatus : {
-							required :true
-						},
-						nombre : {
-							required :true
-						},
-						num_exterior : {
-							required :true
-						},
-						codigo_postal : {
-							required :true
-						},
-						num_interior : {
-							required :true
-						},
-						rfc : {
-							required :true
-						},
-						telefono : {
-							required :true
-						},				
-						ciudad_municipio : {
-							required :true
-						}
-					},
-					messages : {
-						estatus : {
-							required : "Es obligatorio llenar los datos",
-						},
-						nombre : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_exterior : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						codigo_postal : {
-							required : "Es obligatorio llenar los datos",
-						},
-						num_interior : {
-							required : "Es obligatorio llenar los datos",
-						},
-						rfc : {
-							required : "Es obligatorio llenar los datos",
-						},
-						telefono : {
-							required : "Es obligatorio llenar los datos",
-						},				
-						ciudad_municipio : {
-							required : "Es obligatorio llenar los datos",
-						}						
-					},
-					submitHandler : function(form) {
-					    form.preventDefault();
-					}
-				});*/
 
 				$("#inpt2").datepicker({ 
 					dateFormat: 'yy-mm-dd',
@@ -431,6 +359,85 @@
 					language: "es" 
 					});
 
+		
+				$("#frmEditarDatos").validate({
+					rules:{
+							inpt1 : {
+								required :true
+							},
+							inpt2 : {
+								required :true
+							},
+							inpt3 : {
+								required :true
+							},
+							inpt4 : {
+								required :true
+							},
+							inpt5 : {
+								required :true
+							}
+						},
+					messages : {
+							inpt1 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt2 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt3 : {
+								required : "Es obligatorio llenar los datos",
+							},				
+							inpt4 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							inpt5 : {
+								required : "Es obligatorio llenar los datos",
+							}						
+						},	
+						submitHandler : function(form) {
+						    form.preventDefault();
+						}
+				});
+				$("#frmNuevoDato").validate({
+						rules:{
+							nipt1 : {
+								required :true
+							},
+							nipt2 : {
+								required :true
+							},
+							nipt3 : {
+								required :true
+							},
+							nipt4 : {
+								required :true
+							},
+							nipt5 : {
+								required :true
+							}		
+							},
+						messages : {
+							nipt1 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt2 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt3 : {
+								required : "Es obligatorio llenar los datos",
+							},				
+							nipt4 : {
+								required : "Es obligatorio llenar los datos",
+							},
+							nipt5 : {
+								required : "Es obligatorio llenar los datos",
+							}				
+							},
+						submitHandler : function(form) {
+						    form.preventDefault(); 
+						}
+				});
 
 			}; 
 			functionOperacionesForm(); 

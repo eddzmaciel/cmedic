@@ -16,6 +16,8 @@ class CreateNotasTable extends Migration {
 		{
 			 $table->increments('id');
             $table->date('nfecha_emision');
+            $table->integer('npid');
+            $table->integer('nmid');
             $table->string('nmedicamentos');
             $table->integer('nestatus');
             $table->string('nnotas');
