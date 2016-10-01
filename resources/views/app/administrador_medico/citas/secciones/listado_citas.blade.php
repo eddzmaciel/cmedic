@@ -40,7 +40,7 @@
 				<label class="label">Fecha de Cita</label>
 				<label class="input">
 				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="cfecha" id="nipt1" placeholder="Seleccione Fecha de Cita." >
+					<input type="text" required class="input-sm" name="cfecha" id="nipt1" placeholder="SELECCIONE FECHA DE CITA." >
 					<b class="tooltip tooltip-top-right">
 					<i class="fa fa-warning txt-color-teal"></i> 
 					<strong>Observacion</strong> Campo Obligatorio</b>
@@ -60,23 +60,17 @@
 		<div class="row">
 			<section class="col col-6">
 				<label class="label">Paciente</label>
-				<label class="input">
-				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text"  required class="input-sm" name="cpid" id="nipt3" placeholder="Escribe el Paciente." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" >
-					<b class="tooltip tooltip-top-right">
-					<i class="fa fa-warning txt-color-teal"></i> 
-					<strong>Observacion</strong> Campo Obligatorio</b>
-				</label>
+			  		<select class="form-control" id="nipt3" name="cpid"></select>
 			</section>
 			<section class="col col-6">
 				<label class="label">Medico Encargado</label>
-				<label class="input">
-				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="cdid" id="nipt4" placeholder="Escribe Medico Encargado" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
-					<b class="tooltip tooltip-top-right">
-					<i class="fa fa-warning txt-color-teal"></i> 
-					<strong>Observacion</strong> Campo Obligatorio</b>
-				</label>
+			  		<select class="form-control" id="nipt4" name="cdid"></select>
+			</section>
+		</div>
+		<div class="row">
+			<section class="col col-6">
+				<label class="label">Email Paciente</label>
+			  		<select class="form-control" id="nipt5" name="email" ></select>
 			</section>
 		</div>
 
@@ -92,8 +86,24 @@
 	</footer>	
 	<!--// BOTONES-->																									
 </form>
-<!-- // CLIENTE NUEVO-->
 <!--MOSTRAR DATOS REGISTRADOS-->
+<!--<div class="container">
+		<div class="col-xs-5 col-xs-offset-4">
+			<form>
+				<div class="form-group">
+					<label for="Paciente">Pacientes</label>
+	        		<select class="form-control" id="pacientes" name="pacientes"></select>
+				</div>
+				<div class="form-group">
+					<label for="Estado">Estado</label>
+			        <select  class="form-control" id="estado" name="estado">
+			        	<option value="">Es necesario seleccionar un pa&iacute;s</option>
+			        </select>
+				</div>	
+			</form>
+		</div>
+    </div>  -->
+
 <div class="table-responsive" id="tbDatos" style="display:true;">
 	<table id="tblData" class="table table-hover table-striped" width="100%">
 		<thead>
@@ -183,6 +193,42 @@
 <!-- // MODIFICAR DATOS-->
 <!-- SCRIPT-->
 <script type="text/javascript">
+
+	$.getJSON('/api_med/listpacientes/', function( pacientes ){
+		$('#nipt3').html('');
+		$('#nipt3').append($('<option></option>').text('SELECCIONE UN PACIENTE').val(''));
+		$.each(pacientes, function(i) {
+			$('#nipt3').append("<option value=\""+pacientes[i].id+"\">"+pacientes[i].pnombre+"<\/option>");
+		});
+		$('#nipt3').select2();
+	});
+
+	$("#nipt3").change( function(event) {
+		$.ajax({
+			url: '/api_med/email/',
+			type: 'POST',
+			data: 'id=' + $("#nipt3 option:selected").val(),
+		}).done(function ( pacientes ){
+			$.each(pacientes, function(i) {
+				$('#nipt5').append("<option value=\""+pacientes[i].id+"\">"+pacientes[i].pemail+"<\/option>");
+			});
+			$('#nipt5').select2();
+		});
+	});
+
+
+
+	$.getJSON('/api_med/listmedicos/', function( medicos ){
+		$('#nipt4').html('');
+		$('#nipt4').append($('<option></option>').text('SELECCIONE UN MEDICO').val(''));
+		$.each(medicos, function(i) {
+			$('#nipt4').append("<option value=\""+medicos[i].id+"\">"+medicos[i].dnombre+"<\/option>");
+		});
+		$('#nipt4').select2();
+	});
+
+
+
 	_g.dao = {
 		getTable :function(){
 				$.ajax({
@@ -233,7 +279,6 @@
 						_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de eliminar, intente de nuevo.',4);
 					});
 				},
-
 		getModificarDatos :function(id){
 					$.ajax({
 						url: '/api_med/info_citas/'+id,
@@ -251,18 +296,39 @@
 						_gen.notificacion_min('Aviso', 'Al parecer se presento un problema al momento de modificar la información, intente de nuevo.',4);
 					});
 				},
+		getWmail :function(){
+		///if($("#frmNuevoDato").valid() == true && $("#inpt1").val() != ''){	
+           $.ajax({
+                   type:"GET",
+                   url:'/api_med/mail/',
+                   data: {pnombre:$('#nipt1').val(),pemail:$('#nipt3').val()},
+                   success: function(data) {
+                   			//console.log(data);
+                           _gen.notificacion_min('&Eacute;xito', 'Registro y notificaci&oacute;n exitosamente realizada.',1);
+                       }, 
+                    error: function(data) { 
+                    	//console.log(data);
+                    	_gen.notificacion_min('Error', data.responseText,4)
+                    }
+               });
+       		//}
 
-			getLimpiarDatos :function(){
-					$('#inpt1').val('');
-					$('#inpt2').val('');
-					$('#inpt3').val('');
-					$('#inpt4').val('');
-					$('#inpt5').val('');
-					$('#inpt6').val('');
-					$('#inpt7').val('');
-					$('#inpt8').val('');
+		},
+		getLimpiarDatos :function(){
+				$('#inpt1').val('');
+				$('#inpt2').val('');
+				$('#inpt3').val('');
+				$('#inpt4').val('');
+				$('#inpt5').val('');
+				$('#inpt6').val('');
+				$('#inpt7').val('');
+				$('#inpt8').val('');
 				},
-			}; 
+
+
+		}; 
+
+
 		var functionOperacionesForm = function() {
 				_g.dao.getTable();
 				

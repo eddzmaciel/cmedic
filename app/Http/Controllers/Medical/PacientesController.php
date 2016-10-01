@@ -19,6 +19,11 @@ class PacientesController extends Controller {
 	
 	}
 
+
+	public function lispacientes(){
+		$pacientes=Pacientes::all();
+		return View::make('/#medical/pacientes')->with('pacientes',$pacientes);
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *

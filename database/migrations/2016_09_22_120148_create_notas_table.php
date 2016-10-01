@@ -14,10 +14,11 @@ class CreateNotasTable extends Migration {
 	{
 		Schema::create('notas', function(Blueprint $table)
 		{
-			 $table->increments('id');
+			$table->increments('id');
             $table->date('nfecha_emision');
-            $table->integer('npid');
-            $table->integer('nmid');
+            $table->string('nfecha_surtida');
+            $table->string('npid');
+            $table->string('nmid');
             $table->string('nmedicamentos');
             $table->integer('nestatus');
             $table->string('nnotas');

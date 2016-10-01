@@ -345,15 +345,15 @@
 						});
 					},
 
-			getModal:function(id){
+			/*getModal:function(id){
 				$('#ConfModal').modal('show');		
-					},
+					}, */
 
 			getWmail :function(){
 					///if($("#frmNuevoDato").valid() == true && $("#inpt1").val() != ''){	
 		               $.ajax({
 		                       type:"GET",
-		                       url:'/webs/mail/',
+		                       url:'/api_med/mail/',
 		                       data: {pnombre:$('#nipt1').val(),pemail:$('#nipt3').val()},
 		                       success: function(data) {
 		                       			//console.log(data);

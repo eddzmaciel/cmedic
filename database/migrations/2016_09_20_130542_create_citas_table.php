@@ -18,7 +18,7 @@ class CreateCitasTable extends Migration {
             $table->date('cfecha');
             $table->string('cnotas');
             $table->string('cpid');
-            $table->integer('cdid');
+            $table->string('cdid');
             //fk p_id
             //fk d_id
             $table->timestamps();

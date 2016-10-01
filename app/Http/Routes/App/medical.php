@@ -28,12 +28,20 @@ Route::group(['prefix' => 'api_med','namespace' => 'Medical','middleware' => ['a
     Route::resource('citas','CitasController');
     Route::resource('notas','NotasController');
 
+    Route::get('listpacientes','PacientesController@index');
+
+    Route::POST('email', function(){
+        return Pacientes::where('id','=', Input::get('id'))->get();
+    });
+
+    Route::get('listmedicos','MedicosController@index');
+
 
 /*  Route::resource('recipes','RecipesController');
 	Route::resource('bancos','BancosController');
 	Route::resource('empleados','EmpleadosController');
 	Route::resource('clientes','ClientesController');
-	Route::resource('empresas','EmpresasController');
+	Route::resource('empresas','EmpresasController');S
 	Route::resource('proveedores','ProveedoresController');
 	Route::resource('productos','ProductosController');*/
 	/* Contador de empresas, sucursales, centros de costo, subcentros, almacenes y cuentas de banco en el sistema 

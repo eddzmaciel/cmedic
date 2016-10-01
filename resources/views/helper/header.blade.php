@@ -73,7 +73,7 @@
 			<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
 		</div>
 		<div  class="btn-header transparent pull-right">
-			<span> <a href="/360" title="Menu" ><i class="fa fa-home"></i></a> </span>
+			<span> <a href="#/medical/inicio" title="Menu" ><i class="fa fa-home"></i></a> </span>
 		</div>
 		<!-- <div id="hide-menu" class="btn-header pull-right">
 			<span> <a href="javascript:void(0);" data-action="toggleShortcut" title="Open Shortcuts" class="nav-apps"><i class="fa fa-reorder"></i> M&oacute;dulos</a></span>

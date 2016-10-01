@@ -80,26 +80,14 @@
 			</section>
 		</div>
 
-		<div class="row">																	
-		<section class="col col-6">
+		<div class="row">
+			<section class="col col-6">
 				<label class="label">Paciente</label>
-				<label class="input">
-				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="npid" id="nipt5" placeholder="Insertar el Paciente" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
-					<b class="tooltip tooltip-top-right">
-					<i class="fa fa-warning txt-color-teal"></i> 
-					<strong>Observacion</strong> Campo Obligatorio</b>
-				</label>
+			  		<select class="form-control" id="nipt5" name="npid"></select>
 			</section>
 			<section class="col col-6">
-				<label class="label">Médico</label>
-				<label class="input">
-				<i class="icon-append fa fa-question-circle"></i>
-					<input type="text" required class="input-sm" name="nmid" id="nipt6" placeholder="Insertar el Médico." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
-					<b class="tooltip tooltip-top-right">
-					<i class="fa fa-warning txt-color-teal"></i> 
-					<strong>Observacion</strong> Campo Obligatorio</b>
-				</label>
+				<label class="label">Medico Encargado</label>
+			  		<select class="form-control" id="nipt6" name="nmid"></select>
 			</section>
 		</div>
 
@@ -124,6 +112,7 @@
 				<th data-hide="phone">Estatus</th>  <!-- id paciente-->
 				<th data-hide="phone">Id</th>
 				<th data-hide="phone">Fecha de Emision</th>
+				<th data-hide="phone">Fecha de Surtido</th>
 				<th data-hide="phone">Paciente</th>
 				<th data-hide="phone">Medico</th>
 				<th data-hide="phone">Medicamentos</th>
@@ -136,7 +125,7 @@
 <!-- // MOSTRAR DATOS REGISTRADOS -->
 <!-- MODIFICAR DATOS -->
 <div class="modal fade in" id="EditarDatosModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="false" style="display: none;">
-	<div class="modal-backdrop fade in" style="height: 539px;"></div>  
+	<div class="modal-backdrop fade in" style="height: 570px;"></div>  
 	<div class="modal-dialog">  
 		<div class="modal-content">
 		    <div class="modal-header">
@@ -165,7 +154,7 @@
 								<div class="form-group">
 									<label for="">Paciente</label>
 									<label class="input-group">
-										<input type="text" class="form-control" name="npid" id="inpt6" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+										<input type="text" class="form-control" name="npid" id="inpt6" disabled="disabled" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
 										<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									</label>
 								</div>
@@ -177,7 +166,8 @@
 										<input type="number" class="form-control datepicker" disabled="disabled" name="nmid" id="inpt7" >
 										<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									</label>
-							</div>					
+								</div>	
+							</div>				
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="">Medicamentos</label>
@@ -225,6 +215,26 @@
 <!-- // MODIFICAR DATOS-->
 <!-- SCRIPT-->
 <script type="text/javascript">
+
+	$.getJSON('/api_med/listpacientes/', function( pacientes ){
+		$('#nipt5').html('');
+		$('#nipt5').append($('<option></option>').text('SELECCIONE UN PACIENTE').val(''));
+		$.each(pacientes, function(i) {
+			$('#nipt5').append("<option value=\""+pacientes[i].id+"\">"+pacientes[i].pnombre+"<\/option>");
+		});
+		$('#nipt5').select2();
+	});
+
+	$.getJSON('/api_med/listmedicos/', function( medicos ){
+		$('#nipt6').html('');
+		$('#nipt6').append($('<option></option>').text('SELECCIONE UN MEDICO').val(''));
+		$.each(medicos, function(i) {
+			$('#nipt6').append("<option value=\""+medicos[i].id+"\">"+medicos[i].dnombre+"<\/option>");
+		});
+		$('#nipt6').select2();
+	});
+
+
 	_g.dao = {
 		getTable :function(){
 				$.ajax({
@@ -244,11 +254,12 @@
 							var columnDefs = [{"aTargets" : [ 0 ], "mData" : "label_estatus"},
 							    	          {"aTargets" : [ 1 ], "mData" : "id"},
 							    	          {"aTargets" : [ 2 ], "mData" : "nfecha_emision"},
-							    	          {"aTargets" : [ 3], "mData" : "npid"},
-							    	          {"aTargets" : [ 4 ], "mData" : "nmid"},
-							    	          {"aTargets" : [ 5 ], "mData" : "nmedicamentos"},
-							    	          {"aTargets" : [ 6 ], "mData" : "nnotas"},
-							    	          {	"aTargets": [ 7 ], "mData": null,
+							    	          {"aTargets" : [ 3 ], "mData" : "nfecha_emision"},
+							    	          {"aTargets" : [ 4], "mData" : "npid"},
+							    	          {"aTargets" : [ 5 ], "mData" : "nmid"},
+							    	          {"aTargets" : [ 6 ], "mData" : "nmedicamentos"},
+							    	          {"aTargets" : [ 7 ], "mData" : "nnotas"},
+							    	          {	"aTargets": [ 8 ], "mData": null,
 												"mRender": function (o) { 
 													return '<a class="btn btn-sm btn-success" onclick="_g.dao.getModificarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-pencil"></i></a>&nbsp;'+
 															'<a class="btn btn-sm btn-danger" onclick="_g.dao.getEliminarDatos(' + o.id + ')">' + '<i class="glyphicon glyphicon-trash"></i></a>&nbsp;'; 

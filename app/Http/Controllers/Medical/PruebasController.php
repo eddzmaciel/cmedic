@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Medical;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -20,7 +20,8 @@ class PruebasController extends Controller {
 			SoapWrapper::add(function ($service) {
 			    $service
 			        ->name('currency')
-			        ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       	->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
 			        ->trace(true);  });
 			$data = ['Pdestinatario'=>$mail,'Pasunto'=>'Registro Paciente Exitoso','Pcontenido'=>'El paciente '.$nombre.' ha sido registrado correctamente en cMedic.com'];
 			// Using the added service
