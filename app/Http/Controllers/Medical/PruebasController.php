@@ -36,6 +36,38 @@ class PruebasController extends Controller {
 
 	    }
 
+
+	public function EnvioCorreoPc(Request $request)  {
+		/*$nombre=$request->pnombre;
+		$mail=$request->pemail;*/
+		$nombre=$request->input("cnombre");
+		$mail=$request->input("cemail");
+		$fecha=$request->input("cfecha");
+
+
+		/*var_dump($request->input());*/
+		try{
+			// Add a new service to the wrapper
+			SoapWrapper::add(function ($service) {
+			    $service
+			        ->name('currency')
+			       // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       	->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
+			        ->trace(true);  });
+			$data = ['Pdestinatario'=>$mail,'Pasunto'=>'Cita Agendada Con exito','Pcontenido'=>'La cita para el paciente '.$nombre.' ha sido agendada con exito en cMedic.com, favor de acudir a ella de manera puntual. Fecha de cita: '.$fecha.' '];
+			// Using the added service
+			SoapWrapper::service('currency', function ($service) use ($data) {
+				    //var_dump($service->getFunctions());
+				    var_dump($service->call('SendEmail', [$data]));
+				});
+				return redirect('/#medical/pacientes')->withSuccess('¡Operación Exitosa!,  Notificación Enviada a: '.$nombre);
+			}catch(Exception $e){
+				return redirect('/#medical/pacientes')->withSuccess('¡Error de Operación! ->'.$e);	
+			}
+
+	    }
+
+
 	public function multiplicacion()
 	    {
 	        // Add a new service to the wrapper

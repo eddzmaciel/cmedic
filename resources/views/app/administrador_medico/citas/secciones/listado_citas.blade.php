@@ -70,14 +70,20 @@
 		<div class="row">
 			<section class="col col-6">
 				<label class="label">Email Paciente</label>
-			  		<select class="form-control" id="nipt5" name="email" ></select>
+			  	<label class="input">
+				<i class="icon-append fa fa-question-circle"></i>
+					<input type="email" required class="input-sm" name="cemail" id="nipt5" placeholder="Escribir email para notificar." style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<b class="tooltip tooltip-top-right">
+					<i class="fa fa-warning txt-color-teal"></i> 
+					<strong>Observacion</strong> Campo Obligatorio</b>
+				</label>
 			</section>
 		</div>
 
 	</fieldset>
 	<!--BOTONES-->
 	<footer>
-		<button type="submit" id="btnAgregarNuevo" class="btn btn-primary">
+		<button type="submit" onclick="return _g.dao.getWmail()" id="btnAgregarNuevo" class="btn btn-primary">
 			Agregar
 		</button>
 		<button type="button" id="btnCancelarNuevo" class="btn btn-default">
@@ -199,22 +205,26 @@
 		$('#nipt3').append($('<option></option>').text('SELECCIONE UN PACIENTE').val(''));
 		$.each(pacientes, function(i) {
 			$('#nipt3').append("<option value=\""+pacientes[i].id+"\">"+pacientes[i].pnombre+"<\/option>");
-		});
+				//$('#nipt5').append("<option value=\""+$("#nipt3 option:selected").val()+"\">"+pacientes[i].pemail+"<\/option>");
+
+			});
 		$('#nipt3').select2();
 	});
 
-	$("#nipt3").change( function(event) {
+	/*$("#nipt3").change( function(event) {
 		$.ajax({
-			url: '/api_med/email/',
+			url: 'api_med/email/',
 			type: 'POST',
-			data: 'id=' + $("#nipt3 option:selected").val(),
-		}).done(function ( pacientes ){
-			$.each(pacientes, function(i) {
-				$('#nipt5').append("<option value=\""+pacientes[i].id+"\">"+pacientes[i].pemail+"<\/option>");
+			data: 'pacientes=' + $("#nipt3 option:selected").val(),
+		}).done(function ( pac ){
+			$('#nipt5').html('');
+			$('#nipt5').append($('<option></option>').text('Seleccione un estado').val('')); 
+			$.each(pac, function(i) {
+				$('#nipt5').append("<option value=\""+pac[i].id+"\">"+pac[i].pemail+"<\/option>");
 			});
 			$('#nipt5').select2();
 		});
-	});
+	});*/
 
 
 
@@ -300,8 +310,8 @@
 		///if($("#frmNuevoDato").valid() == true && $("#inpt1").val() != ''){	
            $.ajax({
                    type:"GET",
-                   url:'/api_med/mail/',
-                   data: {pnombre:$('#nipt1').val(),pemail:$('#nipt3').val()},
+                   url:'/api_med/mailPc/',
+                   data: {cnombre:$('#nipt3').val(),cemail:$('#nipt5').val(),cfecha:$('#nipt1').val()},
                    success: function(data) {
                    			//console.log(data);
                            _gen.notificacion_min('&Eacute;xito', 'Registro y notificaci&oacute;n exitosamente realizada.',1);

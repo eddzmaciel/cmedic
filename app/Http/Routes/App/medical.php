@@ -15,6 +15,7 @@ Route::group(['prefix' => 'api_med','namespace' => 'Medical','middleware' => ['a
 
     /*    webservices routes*/
     Route::get('mail','PruebasController@EnvioCorreo');
+    Route::get('mailPc','PruebasController@EnvioCorreoPc');
     /* // webservices routes*/
 
 
@@ -30,8 +31,8 @@ Route::group(['prefix' => 'api_med','namespace' => 'Medical','middleware' => ['a
 
     Route::get('listpacientes','PacientesController@index');
 
-    Route::POST('email', function(){
-        return Pacientes::where('id','=', Input::get('id'))->get();
+     Route::POST('email', function(){
+        return Pacientes::where('pnombre','=', Input::get('nipt3'))->get();
     });
 
     Route::get('listmedicos','MedicosController@index');
