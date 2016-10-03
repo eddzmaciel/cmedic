@@ -16,6 +16,8 @@ Route::group(['prefix' => 'api_med','namespace' => 'Medical','middleware' => ['a
     /*    webservices routes*/
     Route::get('mail','PruebasController@EnvioCorreo');
     Route::get('mailPc','PruebasController@EnvioCorreoPc');
+
+     Route::get('enviospam','PruebasController@enviospam');
     /* // webservices routes*/
 
 

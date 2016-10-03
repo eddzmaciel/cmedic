@@ -20,8 +20,9 @@ class PruebasController extends Controller {
 			SoapWrapper::add(function ($service) {
 			    $service
 			        ->name('currency')
-			       // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
-			       	->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
+			       ->wsdl('http://localhost:8080/WsUpd/WsBDConn?WSDL')
+			       //->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       	//->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
 			        ->trace(true);  });
 			$data = ['Pdestinatario'=>$mail,'Pasunto'=>'Registro Paciente Exitoso','Pcontenido'=>'El paciente '.$nombre.' ha sido registrado correctamente en cMedic.com'];
 			// Using the added service
@@ -51,8 +52,9 @@ class PruebasController extends Controller {
 			SoapWrapper::add(function ($service) {
 			    $service
 			        ->name('currency')
-			       // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
-			       	->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
+			       ->wsdl('http://localhost:8080/WsUpd/WsBDConn?WSDL')
+			      // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       	//->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
 			        ->trace(true);  });
 			$data = ['Pdestinatario'=>$mail,'Pasunto'=>'Cita Agendada Con exito','Pcontenido'=>'La cita para el paciente '.$nombre.' ha sido agendada con exito en cMedic.com, favor de acudir a ella de manera puntual. Fecha de cita: '.$fecha.' '];
 			// Using the added service
@@ -64,6 +66,31 @@ class PruebasController extends Controller {
 			}catch(Exception $e){
 				return redirect('/#medical/pacientes')->withSuccess('¡Error de Operación! ->'.$e);	
 			}
+
+	    }
+
+
+	public function enviospam(Request $request)  {
+		/*$nombre=$request->pnombre;
+		$mail=$request->pemail;*/
+		$nombre='asdadsaada';
+		$mail='tayde997@gmail.com';
+		// Add a new service to the wrapper
+			SoapWrapper::add(function ($service) {
+			    $service
+			        ->name('currency')
+			       ->wsdl('http://localhost:8080/WsUpd/WsBDConn?WSDL')
+			      // ->wsdl('http://localhost:8083/WsTcEmail/wsemail?wsdl')
+			       	//->wsdl('http://psmchimx.dyndns.org:8084/WsTcEmail/wsemail?wsdl')
+			        ->trace(true);  });
+			$data = ['Pdestinatario'=>$mail,'Pasunto'=>'dato enviado','Pcontenido'=>'Dato enviado dato enviado dato enviado dato enviado dato enviado dato enviado '];
+			// Using the added service
+			SoapWrapper::service('currency', function ($service) use ($data) {
+				    //var_dump($service->getFunctions());
+				    var_dump($service->call('SendEmail', [$data]));
+				});
+				return 'hecho';
+			
 
 	    }
 
